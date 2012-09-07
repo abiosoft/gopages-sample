@@ -1,0 +1,34 @@
+{{
+	github.com/abiosoft/gopages-sample/store
+}}
+<?go
+	posts := store.GetPosts()
+	user := store.CurrentUser(request)
+	login := false
+	if user != nil {
+		login = true
+	}
+?>
+<html>
+	<head> <title>gopages Sample Blog</title>	</head>
+	<body>
+		<?go if login { ?>
+			<p>
+				Logged in [<?go print(user.Username) ?>] |
+				<a href="/logout">Logout</a>
+			</p>
+			<go:include page="fragments/newpost.html" />
+		<?go } else { ?>
+			<a href="/login">Login</a> or <a href="/register">Register</a> to post
+			<hr />
+		<?go }
+			for _, post := range posts {
+		?>
+			<go:include page="fragments/post.html" />
+		<?go } 
+			if len(posts) == 0 {
+				print("No posts yet")
+			}
+		?>
+	</body>
+</html>

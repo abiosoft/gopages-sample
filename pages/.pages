@@ -1,0 +1,3 @@
+pages/htmlloginhtml.go html/login.html
+pages/htmlregisterhtml.go html/register.html
+pages/htmlindexhtml.go html/index.html

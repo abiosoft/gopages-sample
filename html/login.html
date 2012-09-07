@@ -1,0 +1,34 @@
+{{	
+	github.com/abiosoft/gopages-sample/store
+}}
+<?go
+err := "" 
+if request.Method == "POST" {
+	username := formValue("username")
+	password := formValue("password")
+	if !store.Validate(username, password) {
+		err = "invalid username or password"
+	}else{
+		store.LoginUser(writer, request, username)
+		http.Redirect(writer, request, "/", http.StatusFound)
+	}
+}
+?>
+<html>
+	<head> <title>gopages Sample Blog</title></head>
+	<body>
+		<h3> Login </h3>
+		<?go print(err) ?>
+		<form action="/login" method="post">
+			Username
+			<br />
+			<input type="text" name="username" />
+			<br />
+			Password
+			<br />
+			<input type="password" name="password" />
+			<br />
+			<input type="submit" value="Login" />
+		</form>
+	</body>
+</html>
